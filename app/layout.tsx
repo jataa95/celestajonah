@@ -1,17 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter_Tight } from "next/font/google";
+import { Hedvig_Letters_Serif, Hedvig_Letters_Sans } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import "./globals.css";
 
-const serif = Cormorant_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
-});
-const sans = Inter_Tight({ variable: "--font-sans", subsets: ["latin"] });
+const serif = Hedvig_Letters_Serif({ variable: "--font-serif", subsets: ["latin"] });
+const sans = Hedvig_Letters_Sans({ variable: "--font-sans", subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://celestajonah.vercel.app"),
