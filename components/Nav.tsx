@@ -39,8 +39,11 @@ export default function Nav() {
         <Link href="/" className="nav__logo serif" aria-label="celestajonah — home">
           celestajonah
         </Link>
-        <button className="nav__menu" aria-expanded={open} aria-controls="site-menu" onClick={() => setOpen((o) => !o)}>
-          <span>{open ? "Close" : "Menu"}</span>
+        <button className="nav__menu" aria-expanded={open} aria-controls="site-menu" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}>
+          <span className="nav__roll" aria-hidden>
+            <span>{open ? "Close" : "Menu"}</span>
+            <span>{open ? "Close" : "Menu"}</span>
+          </span>
           <span className={`nav__icon ${open ? "is-x" : ""}`} aria-hidden>
             <i /><i />
           </span>

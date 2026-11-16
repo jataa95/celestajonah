@@ -27,6 +27,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
+        {/* Records the page of the full load, so the home intro only plays when the site opens on "/". */}
+        <script dangerouslySetInnerHTML={{ __html: "window.__firstPath=location.pathname" }} />
         <a href="#main" className="skip">Skip to content</a>
         <Nav />
         <Reveal />

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Collage from "@/components/Collage";
+import IntroGate from "@/components/IntroGate";
 import ScrollText from "@/components/ScrollText";
 import Film from "@/components/Film";
 import { artist, collage, posts, works } from "@/lib/content";
@@ -11,14 +12,32 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="hero">
-        <h1 className="hero__mark serif">
-          celestajonah
-          <span className="sr-only"> — {artist.fullName}</span>
-        </h1>
-        <p className="hero__intro">
-          {artist.fullName}.<br />
-          {artist.role}
-        </p>
+        <IntroGate />
+        <div className="hero__head">
+          <p className="hero__intro">
+            <span aria-hidden>
+              {`${artist.fullName}. ${artist.role}`.split(" ").map((w, i) => (
+                <span key={i} className="wd" style={{ ["--i" as string]: i }}>
+                  <span>{w}</span>
+                </span>
+              ))}
+            </span>
+            <span className="sr-only">
+              {artist.fullName}. {artist.role}
+            </span>
+          </p>
+          <h1 className="hero__mark serif">
+            <span className="hero__word" aria-hidden>
+              {"celestajonah".split("").map((c, i) => (
+                <span key={i} className="ch" style={{ ["--i" as string]: i }}>
+                  <span>{c}</span>
+                </span>
+              ))}
+            </span>
+            <span className="sr-only">celestajonah — {artist.fullName}</span>
+          </h1>
+        </div>
+        <div className="hero__count" aria-hidden />
         <Collage columns={collage} />
       </section>
 

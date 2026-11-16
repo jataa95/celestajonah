@@ -6,7 +6,8 @@ import { works, type Media } from "@/lib/content";
 
 const workBySrc = new Map(works.map((w) => [w.image.src, w.slug]));
 
-const speeds = [0.35, 0.1, -0.05, 0.18, 0.4];
+// Gentle drift while the sticky hero is covered by the next section.
+const speeds = [0.22, 0.08, 0.03, 0.13, 0.26];
 
 /** Five-column photo collage; each column drifts at its own speed on scroll. */
 export default function Collage({ columns }: { columns: Media[][] }) {
@@ -32,13 +33,17 @@ export default function Collage({ columns }: { columns: Media[][] }) {
       {columns.map((col, ci) => (
         <div key={ci} className={`collage__col collage__col--${ci}`}>
           {col.map((m, mi) => (
-            <figure key={m.src + mi} className="collage__item" style={{ ["--d" as string]: `${(ci * 3 + mi) * 70}ms` }}>
+            <figure
+              key={m.src + mi}
+              className="collage__item"
+              style={{ ["--d" as string]: `${(ci * 2 + mi) * 80}ms`, ["--g" as string]: (m.h / m.w).toFixed(3) }}
+            >
               {workBySrc.has(m.src) ? (
-                <Link href={`/works/${workBySrc.get(m.src)}`} className="ph" style={{ aspectRatio: `${m.w} / ${m.h}` }}>
+                <Link href={`/works/${workBySrc.get(m.src)}`} className="ph">
                   <Image src={m.src} alt={m.alt} fill sizes="(max-width: 800px) 45vw, 26vw" priority={mi === 0} />
                 </Link>
               ) : (
-                <div className="ph" style={{ aspectRatio: `${m.w} / ${m.h}` }}>
+                <div className="ph">
                   <Image src={m.src} alt={m.alt} fill sizes="(max-width: 800px) 45vw, 26vw" priority={mi === 0} />
                 </div>
               )}
