@@ -188,8 +188,11 @@ html.menu-open { overflow: hidden; }
   --mt: clamp(24px, 3vw, 56px);
   /* distance from the head's resting place to the vertical centre of the screen */
   --drop: calc(50svh - 70px - var(--mt) - 18px - 7.28vw);
-  position: sticky; top: 0; z-index: 0;
-  height: 100svh; min-height: 560px; overflow: hidden;
+  /* taller than the screen: it scrolls normally until its bottom meets the
+     bottom of the viewport, then sticks while the next section covers it */
+  --hh: 128svh;
+  position: sticky; top: calc(100svh - var(--hh)); z-index: 0;
+  height: var(--hh); min-height: 700px; overflow: hidden;
   display: flex; flex-direction: column;
   padding-top: 70px; text-align: center;
 }

@@ -24,7 +24,8 @@ export default function Collage({ columns }: { columns: Media[][] }) {
       const y = window.scrollY;
       cols.forEach((c, i) => (c.style.transform = `translate3d(0, ${-y * speeds[i % speeds.length]}px, 0)`));
       // 0 → 1 as the next section covers the hero; drives the recede effect in CSS.
-      hero?.style.setProperty("--p", Math.min(1, y / window.innerHeight).toFixed(3));
+      const extra = hero ? hero.offsetHeight - window.innerHeight : 0;
+      hero?.style.setProperty("--p", Math.min(1, Math.max(0, (y - extra) / window.innerHeight)).toFixed(3));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     update();
