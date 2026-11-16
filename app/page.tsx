@@ -12,7 +12,7 @@ export default function Home() {
       {/* HERO */}
       <section className="hero">
         <h1 className="hero__mark serif">
-          Celesta
+          celestajonah
           <span className="sr-only"> — {artist.fullName}</span>
         </h1>
         <p className="hero__intro">
