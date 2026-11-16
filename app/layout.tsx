@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import HoverFX from "@/components/HoverFX";
+import FocusColor from "@/components/FocusColor";
 import "./globals.css";
 
 const serif = Hedvig_Letters_Serif({ variable: "--font-serif", subsets: ["latin"] });
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main" className="main">{children}</main>
         <Footer />
         <HoverFX />
+        <FocusColor />
       </body>
     </html>
   );

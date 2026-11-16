@@ -1,3 +1,4 @@
+import Btn from "@/components/Btn";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -62,9 +63,9 @@ export default function AboutPage() {
         ))}
       </ol>
       <div className="row-btns">
-        <Link href="/works" className="btn">View works</Link>
-        <Link href="/contact" className="btn">Commissions &amp; enquiries</Link>
-        <a href={`mailto:${artist.email}`} className="btn">Email</a>
+        <Btn href="/works">View works</Btn>
+        <Btn href="/contact" variant="line">Commissions &amp; enquiries</Btn>
+        <Btn href={`mailto:${artist.email}`} variant="line">Email</Btn>
       </div>
     </div>
   );

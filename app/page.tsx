@@ -1,3 +1,4 @@
+import Btn from "@/components/Btn";
 import Image from "next/image";
 import Link from "next/link";
 import Collage from "@/components/Collage";
@@ -88,7 +89,7 @@ export default function Home() {
               <dt>Series</dt><dd>{feature.subtitle}</dd>
               <dt>Edition</dt><dd>Unique</dd>
             </dl>
-            <Link href={`/works/${feature.slug}`} className="btn">View the work →</Link>
+            <Btn href={`/works/${feature.slug}`}>View the work</Btn>
           </div>
         </div>
       </section>
@@ -128,7 +129,7 @@ export default function Home() {
           ))}
         </div>
         <div className="center">
-          <Link href="/journal" className="btn btn--stone">All journal</Link>
+          <Btn href="/journal" variant="line">All journal</Btn>
         </div>
       </section>
     </>

@@ -1,3 +1,4 @@
+import Btn from "@/components/Btn";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,7 +43,7 @@ export default async function WorkPage({ params }: PageProps<"/works/[slug]">) {
             <dt>Artist</dt><dd>{artist.known}</dd>
             <dt>Edition</dt><dd>Unique</dd>
           </dl>
-          <a className="btn" href={`mailto:${artist.email}?subject=${subject}`}>Enquire about this work</a>
+          <Btn href={`mailto:${artist.email}?subject=${subject}`}>Enquire about this work</Btn>
         </div>
         <div className="detail__media">
           <div className="ph" style={{ aspectRatio: `${w.image.w} / ${w.image.h}` }}>
