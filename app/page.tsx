@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Collage from "@/components/Collage";
+import Slider from "@/components/Slider";
 import IntroGate from "@/components/IntroGate";
 import ScrollText from "@/components/ScrollText";
 import Film from "@/components/Film";
@@ -39,6 +40,7 @@ export default function Home() {
         </div>
         <div className="hero__count" aria-hidden />
         <Collage columns={collage} />
+        <Slider columns={collage} />
       </section>
 
       {/* STATEMENT */}

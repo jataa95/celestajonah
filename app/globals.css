@@ -111,22 +111,13 @@ html { font-synthesis: none; }
 }
 
 /* nav */
-.nav {
-  position: fixed; inset: 0 0 auto; z-index: 60;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px var(--pad);
-  color: var(--ink);
-  background:
-    linear-gradient(180deg, #f3e7d433 0%, transparent 100%),
-    linear-gradient(100deg, #efe1caCC 0%, #e2cba8B3 38%, #d8bf9cA6 62%, #ecdcc3CC 100%);
-  -webkit-backdrop-filter: blur(18px) saturate(1.25);
-  backdrop-filter: blur(18px) saturate(1.25);
-  border-bottom: 1px solid #2a1a1414;
-  box-shadow: 0 8px 30px -18px #2a1a1440, inset 0 1px 0 #fff6e640;
-  transition: color 0.4s, background 0.4s;
-}
+.nav { color: var(--ink); }
+/* logo and button are fixed on their own so the logo can blend with the page behind it */
+.nav__logo, .nav__menu { position: fixed; top: 12px; z-index: 60; }
+.nav__logo { left: var(--pad); top: 21px; }
+.nav__menu { right: var(--pad); }
 .nav--open { color: var(--bone); background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: transparent; box-shadow: none; }
-.nav__logo { font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1; }
+.nav__logo { color: var(--bone); mix-blend-mode: difference; font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1; }
 .nav__menu {
   display: inline-flex; align-items: center; gap: 12px;
   height: 42px; padding: 0 5px 0 20px; border: 0; border-radius: 999px; cursor: pointer;
@@ -264,14 +255,14 @@ html.menu-open { overflow: hidden; }
 @keyframes fade-out { to { opacity: 0; visibility: hidden; } }
 
 /* page chrome waits for the intro */
-body:has(.hero) .nav { animation: nav-in 0.9s 2.15s var(--ease) both; }
+body:has(.hero) .nav > * { animation: nav-in 0.9s 2.15s var(--ease) both; }
 @keyframes nav-in { from { opacity: 0; transform: translateY(-12px); } }
 
 /* after the first play (or on client-side return) show the finished state */
-.intro-done .hero *, .intro-done .hero, html.intro-done body .nav { animation: none !important; }
+.intro-done .hero *:not(.slider__track), .intro-done .hero, html.intro-done body .nav > * { animation: none !important; }
 .intro-done .hero__count { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .hero *, body .nav { animation: none !important; }
+  .hero *, body .nav > * { animation: none !important; }
   .hero__count { display: none; }
 }
 
@@ -283,6 +274,14 @@ body:has(.hero) .nav { animation: nav-in 0.9s 2.15s var(--ease) both; }
 .collage__col--3 { --off: 9vw; }
 .collage__item { flex: var(--g, 1) 1 0; min-height: 0; display: flex; flex-direction: column; animation: rise 1.4s var(--ease) both; animation-delay: calc(2s + var(--d)); }
 .collage__item .ph { flex: 1; min-height: 0; }
+
+/* mobile hero slider (hidden on larger screens) */
+.slider { display: none; }
+.slider__row { overflow: hidden; }
+.slider__track { display: flex; gap: 6px; width: max-content; animation: slide 46s linear infinite; animation-delay: 2s; }
+.slider__row--rev .slider__track { animation-direction: reverse; animation-duration: 54s; }
+.slider__item { height: 100%; flex: none; }
+@keyframes slide { to { transform: translateX(calc(-50% - 3px)); } }
 
 /* statement */
 .statement { padding-block: clamp(64px, 8vw, 130px) clamp(64px, 8vw, 130px); }
@@ -375,11 +374,12 @@ body:has(.hero) .nav { animation: nav-in 0.9s 2.15s var(--ease) both; }
   .hero { --mt: 22px; --drop: calc(50svh - 70px - var(--mt) - 14px - 7.04vw); }
   .hero__mark { font-size: 17.6vw; margin-bottom: 1.4rem; }
   .hero__intro { padding-inline: var(--pad); }
-  .collage { grid-template-columns: 1fr 1fr; }
-  .collage__col--0, .collage__col--4 { display: none; }
-  .collage__col--3 { display: none; }
-  .collage__col { --off: 0px !important; }
-  .hero { --hh: 150svh; }
+  .collage { display: none; }
+  .hero { --hh: 100svh; min-height: 620px; padding-bottom: 28px; }
+  .slider { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; flex: 1; min-height: 0; animation: rise 1.4s 2s var(--ease) both; }
+  .slider__row { min-height: 0; }
+  .slider__track { height: 100%; }
+  .intro-done .slider__track { animation-delay: 0s; }
   .feature__grid, .studio__inner, .detail, .post__body, .split { grid-template-columns: 1fr; }
   .detail__copy { position: static; }
   .cards { grid-template-columns: 1fr; gap: 2rem; }
