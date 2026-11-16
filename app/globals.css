@@ -272,8 +272,8 @@ html.menu-open { overflow: hidden; }
 .hero ~ section.studio { background: var(--paper-dark); }
 
 /* description + wordmark travel together: revealed in the centre, then settle */
-/* the wordmark sits in the vertical centre of the first screen and never moves */
-.hero__head { position: relative; z-index: 0; margin-top: calc(var(--mt) + var(--drop)); }
+.hero__head { position: relative; z-index: 0; margin-top: var(--mt); animation: settle 1.25s 2.75s var(--ease) both; }
+@keyframes settle { from { transform: translateY(var(--drop)) scale(0.88); } }
 
 .hero__intro {
   font-size: clamp(13px, 1.1vw, 16px); line-height: 1.3; margin-bottom: clamp(8px, 1vw, 18px);
@@ -281,7 +281,7 @@ html.menu-open { overflow: hidden; }
 .wd { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.1em 0 0.15em; margin: -0.1em 0 -0.15em; }
 .wd + .wd { margin-left: 0.28em; }
 /* the description waits until the wordmark has settled, then rises in with the page */
-.wd > span { display: inline-block; animation: word-in 1s calc(3.9s + var(--i) * 0.06s) var(--ease) both; }
+.wd > span { display: inline-block; animation: word-in 1s calc(3.25s + var(--i) * 0.06s) var(--ease) both; }
 @keyframes word-in { from { transform: translateY(140%); opacity: 0; } }
 
 .hero__mark {
@@ -292,18 +292,18 @@ html.menu-open { overflow: hidden; }
 .hero__word { display: inline-block; padding-left: 0.045em; }
 .ch { display: inline-block; overflow: hidden; padding: 0.14em 0 0.24em; margin: -0.14em 0 -0.24em; vertical-align: top; }
 /* letters appear in place (no rise) and scramble on one line */
-.ch > span { display: inline-block; animation: letter-in 0.9s calc(0.1s + var(--i) * 0.09s) ease-out both; }
+.ch > span { display: inline-block; animation: letter-in 0.6s calc(0.1s + var(--i) * 0.07s) ease-out both; }
 @keyframes letter-in { from { opacity: 0; } }
 @keyframes letter { from { transform: translateY(105%) rotate(6deg); } }
 /* scrambling letters sit slightly faded until they lock onto the real letter */
 html:not(.intro-done) .hero__word .ch > span:not(.is-locked) { color: var(--mute); }
-.hero__word .ch > span.is-locked { animation: letter-in 0.9s calc(0.1s + var(--i) * 0.09s) ease-out both, lock 0.8s var(--ease); }
+.hero__word .ch > span.is-locked { animation: letter-in 0.6s calc(0.1s + var(--i) * 0.07s) ease-out both, lock 0.6s var(--ease); }
 @keyframes lock { from { color: var(--mute); } }
 
 @keyframes rise { from { opacity: 0; transform: translateY(30px); } }
 
 /* page chrome waits for the intro */
-body:has(.hero) .nav > * { animation: nav-in 0.9s 4s var(--ease) both; }
+body:has(.hero) .nav > * { animation: nav-in 0.9s 3.35s var(--ease) both; }
 @keyframes nav-in { from { opacity: 0; transform: translateY(-12px); } }
 
 /* after the first play (or on client-side return) show the finished state */
@@ -318,13 +318,13 @@ body:has(.hero) .nav > * { animation: nav-in 0.9s 4s var(--ease) both; }
 .collage__col--1 { --off: 6vw; }
 .collage__col--2 { --off: 0px; }
 .collage__col--3 { --off: 9vw; }
-.collage__item { flex: var(--g, 1) 1 0; min-height: 0; display: flex; flex-direction: column; animation: rise 1.4s var(--ease) both; animation-delay: calc(3.85s + var(--d)); }
+.collage__item { flex: var(--g, 1) 1 0; min-height: 0; display: flex; flex-direction: column; animation: rise 1.4s var(--ease) both; animation-delay: calc(3.2s + var(--d)); }
 .collage__item .ph { flex: 1; min-height: 0; }
 
 /* mobile hero slider (hidden on larger screens) */
 .slider { display: none; }
 .slider__row { overflow: hidden; }
-.slider__track { display: flex; gap: 6px; width: max-content; animation: slide 46s linear infinite; animation-delay: 3.85s; }
+.slider__track { display: flex; gap: 6px; width: max-content; animation: slide 46s linear infinite; animation-delay: 3.2s; }
 .slider__row--rev .slider__track { animation-direction: reverse; animation-duration: 54s; }
 .slider__item { height: 100%; flex: none; }
 @keyframes slide { to { transform: translateX(calc(-50% - 3px)); } }
@@ -428,7 +428,7 @@ body:has(.hero) .nav > * { animation: nav-in 0.9s 4s var(--ease) both; }
   .menu__link { grid-template-columns: 2.4em 1fr; }
   .collage { display: none; }
   .hero { --hh: 100svh; min-height: 620px; padding-bottom: 28px; }
-  .slider { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; flex: 1; min-height: 0; animation: rise 1.4s 3.85s var(--ease) both; }
+  .slider { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; flex: 1; min-height: 0; animation: rise 1.4s 3.2s var(--ease) both; }
   .slider__row { min-height: 0; }
   .slider__track { height: 100%; }
   .intro-done .slider__track { animation-delay: 0s; }

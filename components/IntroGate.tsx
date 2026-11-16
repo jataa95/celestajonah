@@ -20,12 +20,12 @@ function scramble(letters: HTMLElement[]) {
     el.style.overflowX = "clip";
   });
   const start = performance.now();
-  const lockAt = (i: number) => 1300 + i * 200; // ms; last letter locks at ~3.5s
+  const lockAt = (i: number) => 900 + i * 140; // ms; last letter locks at ~2.45s
   let last = 0;
   let raf = 0;
   const tick = (now: number) => {
     const t = now - start;
-    const swap = now - last > 110; // change random letters ~9 times a second
+    const swap = now - last > 85; // change random letters ~12 times a second
     if (swap) last = now;
     let done = true;
     letters.forEach((el, i) => {
@@ -73,7 +73,7 @@ export default function IntroGate() {
     played = true;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const stop = still ? () => {} : scramble(Array.from(document.querySelectorAll<HTMLElement>(".hero__word .ch > span")));
-    const t = window.setTimeout(() => html.classList.add("intro-done"), 5600);
+    const t = window.setTimeout(() => html.classList.add("intro-done"), 4800);
     return () => {
       window.clearTimeout(t);
       stop();
