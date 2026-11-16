@@ -73,6 +73,12 @@ html { font-synthesis: none; }
 }
 .fx-on .ph.is-hover { clip-path: inset(clamp(6px, 1.2%, 14px) round 2px); }
 .fx-on .ph.is-hover img { --s: 1.1; filter: saturate(1.08) contrast(1.03); }
+
+/* pictures rest in greyscale and bloom into colour on hover (mouse devices only) */
+@media (hover: hover) and (pointer: fine) {
+  .ph img { filter: grayscale(1) contrast(1.04) brightness(0.98); transition: transform 1.1s var(--ease), filter 0.9s var(--ease); }
+  .ph:hover img, .ph.is-hover img, a:hover > .ph img, a:focus-visible .ph img { filter: grayscale(0) saturate(1.08) contrast(1.03); }
+}
 .fx-on .ph::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(circle at calc(50% + var(--mx, 0) * 100%) calc(50% + var(--my, 0) * 100%), #e9d8bf2e, transparent 55%);
