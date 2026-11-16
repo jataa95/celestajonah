@@ -241,21 +241,26 @@ export const collage: Media[][] = [
   [
     { src: "/stills/locs-start.jpg", w: 576, h: 1024, alt: "" },
     { src: "/works/veil.jpg", w: 198, h: 242, alt: "" },
+    { src: "/stills/turpentine.jpg", w: 576, h: 724, alt: "" },
   ],
   [
     { src: "/scenes/studio.jpg", w: 576, h: 1024, alt: "Celesta painting at the easel", caption: "In the studio" },
     { src: "/works/stripes.jpg", w: 365, h: 516, alt: "Stripes", caption: "Stripes, 2026" },
+    { src: "/stills/drawing.jpg", w: 576, h: 694, alt: "Pencil drawing on canvas", caption: "The drawing" },
   ],
   [
     { src: "/works/field.jpg", w: 443, h: 608, alt: "The Field", caption: "The Field (Violet), 2026" },
+    { src: "/scenes/visitor.jpg", w: 1440, h: 1920, alt: "A visitor at the exhibition", caption: "On the wall" },
     { src: "/works/teddy.jpg", w: 530, h: 550, alt: "The Bear", caption: "The Bear, 2026" },
   ],
   [
     { src: "/works/boy.jpg", w: 556, h: 600, alt: "Light Behind Him", caption: "Light Behind Him, 2026" },
+    { src: "/works/locs-wip.jpg", w: 576, h: 1024, alt: "Work in progress", caption: "On the easel" },
     { src: "/works/crown.jpg", w: 457, h: 685, alt: "Crown", caption: "Crown, 2026" },
   ],
   [
     { src: "/works/plaid.jpg", w: 326, h: 386, alt: "" },
+    { src: "/stills/sienna.jpg", w: 576, h: 664, alt: "" },
     { src: "/works/gaze.jpg", w: 295, h: 558, alt: "" },
   ],
 ];

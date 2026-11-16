@@ -109,10 +109,17 @@ html { font-synthesis: none; }
   position: fixed; inset: 0 0 auto; z-index: 60;
   display: flex; justify-content: space-between; align-items: center;
   padding: 12px var(--pad);
-  color: var(--ink); background: color-mix(in srgb, var(--bone) 70%, transparent); backdrop-filter: blur(10px) saturate(1.05);
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, #f3e7d433 0%, transparent 100%),
+    linear-gradient(100deg, #efe1caCC 0%, #e2cba8B3 38%, #d8bf9cA6 62%, #ecdcc3CC 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+  border-bottom: 1px solid #2a1a1414;
+  box-shadow: 0 8px 30px -18px #2a1a1440, inset 0 1px 0 #fff6e640;
   transition: color 0.4s, background 0.4s;
 }
-.nav--open { color: var(--bone); background: transparent; backdrop-filter: none; }
+.nav--open { color: var(--bone); background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: transparent; box-shadow: none; }
 .nav__logo { font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1; }
 .nav__menu {
   display: inline-flex; align-items: center; gap: 12px;
@@ -190,11 +197,11 @@ html.menu-open { overflow: hidden; }
   --drop: calc(50svh - 70px - var(--mt) - 18px - 7.28vw);
   /* taller than the screen: it scrolls normally until its bottom meets the
      bottom of the viewport, then sticks while the next section covers it */
-  --hh: 128svh;
+  --hh: 165svh;
   position: sticky; top: calc(100svh - var(--hh)); z-index: 0;
   height: var(--hh); min-height: 700px; overflow: hidden;
   display: flex; flex-direction: column;
-  padding-top: 70px; text-align: center;
+  padding: 70px 0 clamp(64px, 11vh, 140px); text-align: center;
 }
 .hero ~ section { position: relative; z-index: 1; background: var(--paper); }
 
@@ -203,10 +210,6 @@ html.menu-open { overflow: hidden; }
 .hero::after {
   content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background: var(--ink); opacity: calc(var(--p, 0) * 0.45);
-}
-.collage {
-  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
 }
 .hero + section {
   margin-top: -36px; border-radius: 36px 36px 0 0;
@@ -267,11 +270,11 @@ body:has(.hero) .nav { animation: nav-in 0.9s 2.15s var(--ease) both; }
 }
 
 .collage { position: relative; z-index: 1; flex: 1; min-height: 0; display: grid; grid-template-columns: 0.42fr 1fr 1fr 1fr 0.42fr; gap: 6px; align-items: stretch; overflow: hidden; text-align: left; }
-.collage__col { display: flex; flex-direction: column; gap: 6px; height: calc(100% + 32vh); will-change: transform; }
-.collage__col--0, .collage__col--4 { margin-top: -2vw; }
-.collage__col--1 { margin-top: 6vw; }
-.collage__col--2 { margin-top: 0; }
-.collage__col--3 { margin-top: 9vw; }
+.collage__col { --off: 0px; display: flex; flex-direction: column; gap: 6px; margin-top: var(--off); height: calc(100% - var(--off)); will-change: transform; }
+.collage__col--0, .collage__col--4 { --off: 3vw; }
+.collage__col--1 { --off: 6vw; }
+.collage__col--2 { --off: 0px; }
+.collage__col--3 { --off: 9vw; }
 .collage__item { flex: var(--g, 1) 1 0; min-height: 0; display: flex; flex-direction: column; animation: rise 1.4s var(--ease) both; animation-delay: calc(2s + var(--d)); }
 .collage__item .ph { flex: 1; min-height: 0; }
 
@@ -369,7 +372,8 @@ body:has(.hero) .nav { animation: nav-in 0.9s 2.15s var(--ease) both; }
   .collage { grid-template-columns: 1fr 1fr; }
   .collage__col--0, .collage__col--4 { display: none; }
   .collage__col--3 { display: none; }
-  .collage__col { margin-top: 0 !important; }
+  .collage__col { --off: 0px !important; }
+  .hero { --hh: 150svh; }
   .feature__grid, .studio__inner, .detail, .post__body, .split { grid-template-columns: 1fr; }
   .detail__copy { position: static; }
   .cards { grid-template-columns: 1fr; gap: 2rem; }

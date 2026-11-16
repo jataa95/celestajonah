@@ -7,7 +7,7 @@ import { works, type Media } from "@/lib/content";
 const workBySrc = new Map(works.map((w) => [w.image.src, w.slug]));
 
 // Gentle drift while the sticky hero is covered by the next section.
-const speeds = [0.22, 0.08, 0.03, 0.13, 0.26];
+const speeds = [0.12, 0.05, 0.02, 0.08, 0.14];
 
 /** Five-column photo collage; each column drifts at its own speed on scroll. */
 export default function Collage({ columns }: { columns: Media[][] }) {
