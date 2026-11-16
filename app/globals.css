@@ -227,9 +227,21 @@ html { font-synthesis: none; }
 .menu__cap span { position: absolute; inset: 0; transform: translateY(100%); transition: transform 0.6s var(--ease); }
 .menu__cap span.is-active { transform: none; }
 
-.menu__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: 13px; padding-top: 2rem; opacity: 0; transition: opacity 0.6s 0.4s; }
+.menu__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; font-size: 13px; padding-top: 2rem; opacity: 0; transition: opacity 0.6s 0.4s; }
 .menu--open .menu__foot { opacity: 1; }
+.menu__foot-col { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.4rem; }
+.menu__foot-h { display: none; color: #e9d8bf80; }
 .menu__social { display: flex; gap: 1.4rem; }
+
+/* mobile filmstrip (hidden on desktop) */
+.menu__strip { display: none; }
+.menu__strip-row { overflow: hidden; margin-inline: calc(var(--pad) * -1); }
+.menu__strip-track { display: flex; gap: 8px; width: max-content; height: 100%; padding-inline: var(--pad); animation: slide 38s linear infinite; animation-play-state: paused; }
+.menu--open .menu__strip-track { animation-play-state: running; }
+.menu__strip-item { display: flex; flex-direction: column; gap: 6px; height: 100%; width: clamp(130px, 38vw, 200px); flex: none; }
+.menu__strip-img { position: relative; flex: 1; min-height: 0; overflow: hidden; border-radius: 2px; background: #3a261d; }
+.menu__strip-img img { object-fit: cover; }
+.menu__strip-item figcaption { font-size: 11px; color: #e9d8bf99; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 html.menu-open { overflow: hidden; }
 
 /* layout + footer reveal */
@@ -420,12 +432,25 @@ body:has(.hero) .nav > * { animation: nav-in 0.9s 3.35s var(--ease) both; }
   .hero { --mt: 22px; --drop: calc(50svh - 70px - var(--mt) - 14px - 7.04vw); }
   .hero__mark { font-size: 17.6vw; margin-bottom: 1.4rem; }
   .hero__intro { padding-inline: var(--pad); }
-  .menu { padding-top: 76px; }
-  .menu__grid { grid-template-columns: 1fr; align-content: start; align-items: start; gap: 18px; }
-  .menu__art { justify-self: start; max-width: none; width: 100%; display: grid; grid-template-columns: min(52vw, 260px) 1fr; gap: 14px; align-items: end; margin-top: 8px; }
-  .menu__frame { aspect-ratio: 4 / 5; }
-  .menu__note { display: none; }
-  .menu__link { grid-template-columns: 2.4em 1fr; }
+  .menu { padding: 74px var(--pad) 18px; }
+  .menu__grid { display: flex; flex-direction: column; gap: 22px; align-items: stretch; }
+  .menu__art { display: none; }
+  .menu__link { grid-template-columns: 2.2em 1fr auto; padding: 0.28em 0 0.22em; }
+  .menu__label { font-size: clamp(2.3rem, 11vw, 3.2rem); }
+  .menu__note { display: block; opacity: 1; transform: none; font-size: 11px; align-self: center; }
+  .menu__link:hover .menu__label, .menu__link.is-hover .menu__label { transform: none; }
+  .menu nav:hover .menu__link:not(:hover):not(.is-hover) .menu__label { color: inherit; }
+  .menu__strip {
+    display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 150px;
+    opacity: 0; transform: translateY(16px); transition: opacity 0.8s 0.45s, transform 1s 0.45s var(--ease);
+  }
+  .menu--open .menu__strip { opacity: 1; transform: none; }
+  .menu__strip-head { display: flex; justify-content: space-between; color: #e9d8bf80; border-top: 1px solid #e9d8bf26; padding-top: 10px; }
+  .menu__strip-row { flex: 1; min-height: 0; }
+  .menu__foot { display: grid; grid-template-columns: 1fr auto; align-items: start; padding-top: 16px; border-top: 1px solid #e9d8bf26; margin-top: 16px; }
+  .menu__foot-col { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .menu__foot-h { display: block; margin-bottom: 4px; }
+  .menu__social { flex-direction: column; gap: 4px; align-items: flex-end; text-align: right; }
   .collage { display: none; }
   .hero { --hh: 100svh; min-height: 620px; padding-bottom: 28px; }
   .slider { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; flex: 1; min-height: 0; animation: rise 1.4s 3.2s var(--ease) both; }

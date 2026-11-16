@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { artist } from "@/lib/content";
+import { artist, works } from "@/lib/content";
 
 const links = [
   { href: "/", label: "Home", note: "Portraits that look back", img: "/works/field.jpg", cap: "The Field (Violet), 2026" },
@@ -92,14 +92,36 @@ export default function Nav() {
               })}
             </figcaption>
           </figure>
+          <div className="menu__strip" aria-hidden>
+            <div className="menu__strip-head">
+              <span className="label">Selected works</span>
+              <span className="label">{String(works.length).padStart(2, "0")} pieces</span>
+            </div>
+            <div className="menu__strip-row">
+              <div className="menu__strip-track">
+                {[...works, ...works].map((w, i) => (
+                  <figure key={i} className="menu__strip-item">
+                    <div className="menu__strip-img">
+                      <Image src={w.image.src} alt="" fill sizes="45vw" />
+                    </div>
+                    <figcaption>{w.title}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="menu__foot">
-          <a href={`mailto:${artist.email}`} className="link-u">{artist.email}</a>
-          <span className="menu__social">
+          <div className="menu__foot-col">
+            <span className="label menu__foot-h">Write</span>
+            <a href={`mailto:${artist.email}`} className="link-u">{artist.email}</a>
+          </div>
+          <div className="menu__foot-col menu__social">
+            <span className="label menu__foot-h">Follow</span>
             <a href={artist.links.instagram} target="_blank" rel="noreferrer" className="link-u">Instagram</a>
             <a href={artist.links.tiktok} target="_blank" rel="noreferrer" className="link-u">TikTok</a>
             <a href={artist.links.youtube} target="_blank" rel="noreferrer" className="link-u">YouTube</a>
-          </span>
+          </div>
         </div>
       </div>
     </>
