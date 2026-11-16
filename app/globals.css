@@ -280,7 +280,9 @@ html.menu-open { overflow: hidden; }
 }
 .wd { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.1em 0 0.15em; margin: -0.1em 0 -0.15em; }
 .wd + .wd { margin-left: 0.28em; }
-.wd > span { display: inline-block; animation: letter 1s calc(0.25s + var(--i) * 0.1s) var(--ease) both; }
+/* the description waits until the wordmark has settled, then rises in with the page */
+.wd > span { display: inline-block; animation: word-in 1s calc(2.05s + var(--i) * 0.06s) var(--ease) both; }
+@keyframes word-in { from { transform: translateY(140%); opacity: 0; } }
 
 .hero__mark {
   position: relative; z-index: 0; pointer-events: none;
@@ -291,25 +293,12 @@ html.menu-open { overflow: hidden; }
 .ch { display: inline-block; overflow: hidden; padding: 0.14em 0 0.24em; margin: -0.14em 0 -0.24em; vertical-align: top; }
 .ch > span { display: inline-block; animation: letter 1.05s calc(0.15s + var(--i) * 0.055s) var(--ease) both; }
 @keyframes letter { from { transform: translateY(105%) rotate(6deg); } }
+/* scrambling letters sit slightly faded until they lock onto the real letter */
+html:not(.intro-done) .hero__word .ch > span:not(.is-locked) { color: var(--mute); }
+.hero__word .ch > span.is-locked { animation: letter 1.05s calc(0.15s + var(--i) * 0.055s) var(--ease) both, lock 0.5s var(--ease); }
+@keyframes lock { from { color: var(--mute); } }
 
 @keyframes rise { from { opacity: 0; transform: translateY(30px); } }
-
-@property --n { syntax: "<integer>"; inherits: false; initial-value: 0; }
-.hero__count {
-  position: fixed; left: 50%; bottom: 26px; translate: -50% 0; z-index: 70; width: min(220px, 50vw);
-  display: grid; gap: 8px; justify-items: center; font-size: 11px; letter-spacing: 0.06em; color: var(--mute);
-  counter-reset: n var(--n);
-  animation: count 1.45s 0.1s cubic-bezier(0.65, 0, 0.35, 1) both, fade-out 0.5s 1.55s both;
-  pointer-events: none;
-}
-.hero__count::before { content: counter(n) "%"; }
-.hero__count::after {
-  content: ""; height: 1px; width: 100%; background: var(--ink); transform-origin: left;
-  animation: grow 1.45s 0.1s cubic-bezier(0.65, 0, 0.35, 1) both;
-}
-@keyframes count { from { --n: 0; } to { --n: 100; } }
-@keyframes grow { from { transform: scaleX(0); } }
-@keyframes fade-out { to { opacity: 0; visibility: hidden; } }
 
 /* page chrome waits for the intro */
 body:has(.hero) .nav > * { animation: nav-in 0.9s 2.15s var(--ease) both; }
@@ -317,10 +306,8 @@ body:has(.hero) .nav > * { animation: nav-in 0.9s 2.15s var(--ease) both; }
 
 /* after the first play (or on client-side return) show the finished state */
 .intro-done .hero *:not(.slider__track), .intro-done .hero, html.intro-done body .nav > * { animation: none !important; }
-.intro-done .hero__count { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero *, body .nav > * { animation: none !important; }
-  .hero__count { display: none; }
 }
 
 .collage { position: relative; z-index: 1; flex: 1; min-height: 0; display: grid; grid-template-columns: 0.42fr 1fr 1fr 1fr 0.42fr; gap: 6px; align-items: stretch; overflow: hidden; text-align: left; }

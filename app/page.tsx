@@ -39,7 +39,6 @@ export default function Home() {
             <span className="sr-only">celestajonah — {artist.fullName}</span>
           </h1>
         </div>
-        <div className="hero__count" aria-hidden />
         <Collage columns={collage} />
         <Slider columns={collage} />
       </section>
