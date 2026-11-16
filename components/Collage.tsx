@@ -17,13 +17,17 @@ export default function Collage({ columns }: { columns: Media[][] }) {
     const root = ref.current;
     if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const cols = Array.from(root.querySelectorAll<HTMLElement>(".collage__col"));
+    const hero = root.closest<HTMLElement>(".hero");
     let raf = 0;
     const update = () => {
       raf = 0;
       const y = window.scrollY;
       cols.forEach((c, i) => (c.style.transform = `translate3d(0, ${-y * speeds[i % speeds.length]}px, 0)`));
+      // 0 → 1 as the next section covers the hero; drives the recede effect in CSS.
+      hero?.style.setProperty("--p", Math.min(1, y / window.innerHeight).toFixed(3));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);

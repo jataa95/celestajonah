@@ -194,6 +194,21 @@ html.menu-open { overflow: hidden; }
   padding-top: 70px; text-align: center;
 }
 .hero ~ section { position: relative; z-index: 1; background: var(--paper); }
+
+/* softer hand-off: the hero recedes while the next section rises over it like a sheet */
+.hero__head, .collage { transform-origin: 50% 0; transform: translateY(calc(var(--p, 0) * -6vh)) scale(calc(1 - var(--p, 0) * 0.07)); }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: var(--ink); opacity: calc(var(--p, 0) * 0.45);
+}
+.collage {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
+}
+.hero + section {
+  margin-top: -36px; border-radius: 36px 36px 0 0;
+  box-shadow: 0 -24px 60px -20px #2a1a1440;
+}
 .hero ~ section.studio { background: var(--paper-dark); }
 
 /* description + wordmark travel together: revealed in the centre, then settle */
