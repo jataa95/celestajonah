@@ -239,10 +239,11 @@ html { font-synthesis: none; }
 .menu__divider span { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; translate: -50% -50%; rotate: 45deg; border: 1px solid #c9a982; background: var(--ink); }
 .menu__strip-row { overflow: hidden; margin-inline: calc(var(--pad) * -1); touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
 .menu__strip-row.is-dragging { cursor: grabbing; }
-.menu__strip-track { display: flex; gap: 10px; width: max-content; height: 100%; padding-inline: var(--pad); will-change: transform; }
-.menu__strip-item { height: 100%; width: clamp(120px, 34vw, 180px); flex: none; transform: skewX(var(--lean, 0deg)) scale(var(--squeeze, 1)); transition: transform 0.25s ease-out; }
-.menu__strip-img { position: relative; height: 100%; overflow: hidden; border-radius: 3px; background: #3a261d; box-shadow: 0 18px 36px -22px #000c; }
-.menu__strip-img img { object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+.menu__strip-track { display: flex; gap: 3px; width: max-content; height: 100%; padding-inline: var(--pad); will-change: transform; }
+/* slanted frames; the picture inside is counter-slanted so faces stay upright */
+.menu__strip-item { --slant: -9deg; height: 100%; width: clamp(120px, 34vw, 180px); flex: none; transform: skewX(calc(var(--slant) + var(--lean, 0deg))) scale(var(--squeeze, 1)); transition: transform 0.25s ease-out; }
+.menu__strip-img { position: relative; height: 100%; overflow: hidden; border-radius: 2px; background: #3a261d; box-shadow: 0 18px 36px -22px #000c; }
+.menu__strip-img img { object-fit: cover; pointer-events: none; -webkit-user-drag: none; transform: skewX(9deg) scale(1.22); }
 html.menu-open { overflow: hidden; }
 
 /* layout + footer reveal */
