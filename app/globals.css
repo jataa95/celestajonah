@@ -432,25 +432,20 @@ body:has(.hero) .nav > * { animation: nav-in 0.9s 3.35s var(--ease) both; }
   .hero { --mt: 22px; --drop: calc(50svh - 70px - var(--mt) - 14px - 7.04vw); }
   .hero__mark { font-size: 17.6vw; margin-bottom: 1.4rem; }
   .hero__intro { padding-inline: var(--pad); }
-  .menu { padding: 74px var(--pad) 18px; }
-  .menu__grid { display: flex; flex-direction: column; gap: 22px; align-items: stretch; }
-  .menu__art { display: none; }
-  .menu__link { grid-template-columns: 2.2em 1fr auto; padding: 0.28em 0 0.22em; }
-  .menu__label { font-size: clamp(2.3rem, 11vw, 3.2rem); }
-  .menu__note { display: block; opacity: 1; transform: none; font-size: 11px; align-self: center; }
+  .menu { padding: 84px var(--pad) 28px; }
+  .menu__grid { display: flex; flex-direction: column; gap: 28px; align-items: stretch; }
+  .menu__art, .menu__n, .menu__note, .menu__strip-head, .menu__strip-item figcaption, .menu__foot { display: none; }
+  .menu li { border-bottom: 0; }
+  .menu__link { display: flex; justify-content: center; padding: 0.12em 0; }
+  .menu__label { font-size: clamp(2.6rem, 12vw, 3.4rem); }
   .menu__link:hover .menu__label, .menu__link.is-hover .menu__label { transform: none; }
   .menu nav:hover .menu__link:not(:hover):not(.is-hover) .menu__label { color: inherit; }
   .menu__strip {
-    display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 150px;
+    display: flex; flex-direction: column; flex: 1; min-height: 150px;
     opacity: 0; transform: translateY(16px); transition: opacity 0.8s 0.45s, transform 1s 0.45s var(--ease);
   }
   .menu--open .menu__strip { opacity: 1; transform: none; }
-  .menu__strip-head { display: flex; justify-content: space-between; color: #e9d8bf80; border-top: 1px solid #e9d8bf26; padding-top: 10px; }
   .menu__strip-row { flex: 1; min-height: 0; }
-  .menu__foot { display: grid; grid-template-columns: 1fr auto; align-items: start; padding-top: 16px; border-top: 1px solid #e9d8bf26; margin-top: 16px; }
-  .menu__foot-col { flex-direction: column; align-items: flex-start; gap: 4px; }
-  .menu__foot-h { display: block; margin-bottom: 4px; }
-  .menu__social { flex-direction: column; gap: 4px; align-items: flex-end; text-align: right; }
   .collage { display: none; }
   .hero { --hh: 100svh; min-height: 620px; padding-bottom: 28px; }
   .slider { display: grid; grid-template-rows: 1fr 1fr; gap: 6px; flex: 1; min-height: 0; animation: rise 1.4s 3.2s var(--ease) both; }
