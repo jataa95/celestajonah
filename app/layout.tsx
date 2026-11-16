@@ -3,6 +3,7 @@ import { Hedvig_Letters_Serif, Hedvig_Letters_Sans } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import HoverFX from "@/components/HoverFX";
 import "./globals.css";
 
 const serif = Hedvig_Letters_Serif({ variable: "--font-serif", subsets: ["latin"] });
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Reveal />
         <main id="main" className="main">{children}</main>
         <Footer />
+        <HoverFX />
       </body>
     </html>
   );

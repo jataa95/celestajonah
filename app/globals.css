@@ -57,7 +57,39 @@ html { font-synthesis: none; }
 
 .ph { position: relative; display: block; overflow: hidden; background: var(--stone); }
 .ph img { object-fit: cover; transition: transform 1.4s var(--ease); }
-a:hover > .ph img, a:hover .ph img { transform: scale(1.03); }
+
+/* premium image hover (mouse only, see HoverFX) */
+.fx-on .ph { clip-path: inset(0 round 0); transition: clip-path 1s var(--ease); cursor: none; }
+.fx-on .ph img {
+  transform: translate3d(calc(var(--mx, 0) * -18px), calc(var(--my, 0) * -18px), 0) scale(var(--s, 1));
+  transition: transform 1.1s var(--ease), filter 1s var(--ease);
+  will-change: transform;
+}
+.fx-on .ph.is-hover { clip-path: inset(clamp(6px, 1.2%, 14px) round 2px); }
+.fx-on .ph.is-hover img { --s: 1.1; filter: saturate(1.08) contrast(1.03); }
+.fx-on .ph::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle at calc(50% + var(--mx, 0) * 100%) calc(50% + var(--my, 0) * 100%), #e9d8bf2e, transparent 55%);
+  opacity: 0; transition: opacity 0.8s var(--ease);
+}
+.fx-on .ph.is-hover::after { opacity: 1; }
+.fx-on figure:has(.ph.is-hover) .cap, .fx-on a:has(.ph.is-hover) .cap { color: var(--ink); }
+
+.cursor { position: fixed; left: 0; top: 0; z-index: 90; pointer-events: none; display: none; }
+.fx-on .cursor { display: block; }
+.cursor__disc {
+  position: absolute; left: 0; top: 0; width: 88px; height: 88px; margin: -44px 0 0 -44px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--bone);
+  transform: scale(0); opacity: 0;
+  transition: transform 0.7s var(--ease), opacity 0.4s, width 0.6s var(--ease), height 0.6s var(--ease), margin 0.6s var(--ease);
+}
+.cursor.is-on .cursor__disc { transform: scale(0.22); opacity: 1; }
+.cursor.is-on.is-link .cursor__disc { transform: scale(1); }
+.cursor.is-down .cursor__disc { transform: scale(0.85); }
+.cursor.is-on:not(.is-link).is-down .cursor__disc { transform: scale(0.18); }
+.cursor__label { font-size: 12px; letter-spacing: 0.04em; opacity: 0; transform: translateY(6px); transition: opacity 0.4s 0.1s, transform 0.6s var(--ease); }
+.cursor.is-link .cursor__label { opacity: 1; transform: none; }
 
 [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 1.1s var(--ease), transform 1.2s var(--ease); transition-delay: var(--d, 0ms); }
 [data-reveal].is-in { opacity: 1; transform: none; }
