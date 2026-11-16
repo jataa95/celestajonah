@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { artist, works } from "@/lib/content";
+import { artist } from "@/lib/content";
+import MenuStrip from "@/components/MenuStrip";
 
 const links = [
   { href: "/", label: "Home", note: "Portraits that look back", img: "/works/field.jpg", cap: "The Field (Violet), 2026" },
@@ -92,24 +93,7 @@ export default function Nav() {
               })}
             </figcaption>
           </figure>
-          <div className="menu__strip" aria-hidden>
-            <div className="menu__strip-head">
-              <span className="label">Selected works</span>
-              <span className="label">{String(works.length).padStart(2, "0")} pieces</span>
-            </div>
-            <div className="menu__strip-row">
-              <div className="menu__strip-track">
-                {[...works, ...works].map((w, i) => (
-                  <figure key={i} className="menu__strip-item">
-                    <div className="menu__strip-img">
-                      <Image src={w.image.src} alt="" fill sizes="45vw" />
-                    </div>
-                    <figcaption>{w.title}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          </div>
+          <MenuStrip active={open} />
         </div>
         <div className="menu__foot">
           <div className="menu__foot-col">
